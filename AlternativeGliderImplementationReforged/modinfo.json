@@ -1,0 +1,18 @@
+{
+  "type": "code",
+  "modid": "alternativegliderimplementationreforged",
+  "name": "AlternativeGliderImplementationReforged",
+  "authors": [
+    "TheInsanityGod"
+  ],
+  "contributors": [
+    "Rangelost" //Author of the original mod
+  ],
+  "description": "Alters glider controls and physics.",
+  "version": "1.0.0",
+  "side": "Universal",
+  "dependencies": {
+    "game": "",
+    "insanitylib": ""
+  }
+}
