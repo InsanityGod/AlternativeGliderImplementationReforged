@@ -1,12 +1,10 @@
 ﻿using AlternativeGliderImplementationReforged.Config;
 using HarmonyLib;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Server;
@@ -20,6 +18,7 @@ namespace AlternativeGliderImplementationReforged.Code.HarmonyPatches
         //TODO maybe have wind affect stuff
         //TODO maybe move this to config
         public const double speedMin = 0.0005;
+
         public const double speedMid = 0.0025;
         public const double speedMax = 0.01;
 
@@ -177,39 +176,6 @@ namespace AlternativeGliderImplementationReforged.Code.HarmonyPatches
             }
         }
 
-        //// Glide while climing option.
-        //[HarmonyPatch(typeof(ModSystemGliding), "Input_InWorldAction")]
-        //[HarmonyPrefix] //TODO transpile patch instead
-        //public static bool ClimbingBehaviorChange(ModSystemGliding __instance, EnumEntityAction action, bool on, ref EnumHandling handled)
-        //{
-        //    if (AltGliderServerConfig.Instance.AllowGlideWhileClimbing) return true;
-        //
-        //    Traverse self = Traverse.Create(__instance);
-        //    ICoreClientAPI capi = self.Field<ICoreClientAPI>("capi").Value;
-        //    bool HasGilder = self.Property<bool>("HasGilder").Value;
-        //
-        //    var eplr = capi.World.Player.Entity;
-        //    if (action == EnumEntityAction.Jump
-        //            && on
-        //            && !eplr.OnGround
-        //            && HasGilder
-        //            && !eplr.Controls.IsFlying
-        //            && !eplr.Controls.IsClimbing)
-        //    {
-        //        eplr.Controls.Gliding = true;
-        //        eplr.Controls.IsFlying = true;
-        //
-        //        capi.World.Player.Entity.MarkShapeModified();
-        //    }
-        //    else if (action == EnumEntityAction.Glide && !on)
-        //    {
-        //        capi.World.Player.Entity.MarkShapeModified();
-        //    }
-        //
-        //    // Skip original method.
-        //    return false;
-        //}
-
         public static bool ClimbingCheck(EntityControls controls) => AltGliderServerConfig.Instance.AllowGlideWhileClimbing || !controls.IsClimbing;
 
         [HarmonyPatch(typeof(ModSystemGliding), "Input_InWorldAction")]
@@ -219,7 +185,7 @@ namespace AlternativeGliderImplementationReforged.Code.HarmonyPatches
             var codes = instructions.ToList();
             var label = generator.DefineLabel();
             var fieldToFind = AccessTools.Field(typeof(EntityControls), nameof(EntityControls.IsFlying));
-            for(var i = 0; i < codes.Count; i++)
+            for (var i = 0; i < codes.Count; i++)
             {
                 var code = codes[i];
                 if (code.opcode == OpCodes.Ldfld && code.operand is FieldInfo field && field == fieldToFind && codes[i + 1].opcode == OpCodes.Brtrue_S)

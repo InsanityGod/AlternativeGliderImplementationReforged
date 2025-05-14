@@ -26,7 +26,7 @@ namespace AlternativeGliderImplementationReforged.Code.GUI
         protected LoadedTexture barTexture;
 
         private int valueHeight;
-        
+
         public AltGliderStatbar(ICoreClientAPI capi, ElementBounds bounds, Color color, bool rightToLeft) : base(capi, bounds)
         {
             Controls = capi.World.Player.Entity.Controls;
@@ -52,7 +52,7 @@ namespace AlternativeGliderImplementationReforged.Code.GUI
             EmbossRoundRectangleElement(ctxStatic, 0, 0, Bounds.InnerWidth, Bounds.InnerHeight, false, 3, 1);
 
             RecomposeOverlays();
-            
+
             generateTexture(surface, ref baseTexture);
             surface.Dispose();
             ctxStatic.Dispose();

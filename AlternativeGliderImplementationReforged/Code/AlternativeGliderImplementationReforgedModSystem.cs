@@ -5,6 +5,7 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 
 [assembly: AutoPatcher("alternativegliderimplementationreforged")]
+
 namespace AlternativeGliderImplementationReforged.Code
 {
     public class AlternativeGliderImplementationReforgedModSystem : ModSystem
@@ -15,14 +16,13 @@ namespace AlternativeGliderImplementationReforged.Code
         {
             api.Event.PlayerEntitySpawn += player =>
             {
-                if(player == api.World.Player)
+                if (player == api.World.Player)
                 {
                     //Load GUI when player entity is available
                     LoadGui(api);
                 }
             };
         }
-
 
         public void LoadGui(ICoreClientAPI capi)
         {

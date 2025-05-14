@@ -1,10 +1,5 @@
 ﻿using InsanityLib.Attributes.Auto.Config;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AlternativeGliderImplementationReforged.Config
 {
@@ -18,15 +13,15 @@ namespace AlternativeGliderImplementationReforged.Config
         /// </summary>
         [Category("Controls")]
         [DefaultValue(false)]
-		public bool AlternativeDiveControls { get; set; }
+        public bool AlternativeDiveControls { get; set; }
 
         /// <summary>
         /// If enalbled braking is done through jump instead of walking backwards
         /// </summary>
         [Category("Controls")]
         [DefaultValue(false)]
-		public bool AlternativeBrakeControls { get; set; }
-		
+        public bool AlternativeBrakeControls { get; set; }
+
         /// <summary>
         /// Wether the player is allowed to glide while climbing
         /// </summary>

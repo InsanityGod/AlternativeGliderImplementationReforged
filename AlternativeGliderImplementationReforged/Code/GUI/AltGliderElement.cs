@@ -8,7 +8,7 @@ namespace AlternativeGliderImplementationReforged.Code.GUI
     {
         public const string dialogName = "altglider";
         public const string barKey = "altgliderbar";
-        
+
         public const float barX = 0;
         public const float barY = -256;
         public const float barHeight = 10;
@@ -16,12 +16,11 @@ namespace AlternativeGliderImplementationReforged.Code.GUI
         public readonly Color Color = new(1, 1, 1);
 
         protected AltGliderStatbar bar;
-        
+
         private readonly long listenerId;
-        
+
         public AltGliderElement(ICoreClientAPI capi) : base(capi)
         {
-
             // Create bar.
             ElementBounds dialogBounds = new()
             {
@@ -39,16 +38,16 @@ namespace AlternativeGliderImplementationReforged.Code.GUI
                     .Compose();
 
             bar = (AltGliderStatbar)Composers[dialogName].GetElement(barKey);
-            
+
             listenerId = capi.World.RegisterGameTickListener(UpdateValue, 50);
-            
+
             TryOpen();
         }
-        
+
         public void UpdateValue(float deltaTime)
         {
-            if(!bar.Visible) return;
-            
+            if (!bar.Visible) return;
+
             bar.SetValue((float)bar.Controls.GlideSpeed);
         }
 
