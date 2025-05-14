@@ -14,7 +14,7 @@ namespace AlternativeGliderImplementationReforged.Config
         public static AltGliderClientConfig Instance { get; private set; }
 
         /// <summary>
-        /// Wether to display the glide power bar
+        /// Whether to display the glide power bar
         /// </summary>
         [DefaultValue(true)]
         public bool ShowBar {  get; set; } = true;
