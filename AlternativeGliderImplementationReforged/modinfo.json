@@ -9,7 +9,7 @@
     "Rangelost" //Author of the original mod
   ],
   "description": "Alters glider controls and physics.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "side": "Universal",
   "dependencies": {
     "game": "",

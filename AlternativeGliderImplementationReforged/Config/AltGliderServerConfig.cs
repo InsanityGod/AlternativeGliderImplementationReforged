@@ -28,5 +28,20 @@ namespace AlternativeGliderImplementationReforged.Config
         [Category("Controls")]
         [DefaultValue(true)]
         public bool AllowGlideWhileClimbing { get; set; } = true;
+
+        /// <summary>
+        /// Lift generated relative to the speed reduction caused by braking
+        /// Original mod value: 0.035
+        /// </summary>
+        [DefaultValue(0.045d)]
+        public double BrakeLiftAcc { get; set; } = 0.045d;
+
+        /// <summary>
+        /// This limits the lift in relation to the horizontal speed in the form of:
+        /// lift * Math.Min(horizontalMotion / BrakeHMotionLimit, 1)
+        /// Original mod value: 0.02
+        /// </summary>
+        [DefaultValue(0.015d)]
+        public double BrakeHMotionLimit { get; set; } = 0.015d;
     }
 }

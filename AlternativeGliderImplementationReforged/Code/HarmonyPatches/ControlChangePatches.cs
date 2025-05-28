@@ -33,8 +33,6 @@ namespace AlternativeGliderImplementationReforged.Code.HarmonyPatches
 
         public const double brakeSpeedDec = 0.00025;
         public const double brakeMotionPctDec = 1.0;
-        public const double brakeLiftAcc = 0.035;
-        public const double brakeHmotionLimit = 0.02;
         public const double brakeFallLimit = -0.025;
         public const double brakeFallResist = 0.01;
 
@@ -86,10 +84,10 @@ namespace AlternativeGliderImplementationReforged.Code.HarmonyPatches
                 if (hmotion > speedMid)
                 {
                     // Partial lift for partial speed decrease.
-                    double lift = (dec / brakeSpeedDec) * brakeLiftAcc;
+                    double lift = (dec / brakeSpeedDec) * AltGliderServerConfig.Instance.BrakeLiftAcc;
 
                     // Lift proportionally to horizontal motion.
-                    pos.Motion.Y += lift * Math.Min(hmotion / brakeHmotionLimit, 1);
+                    pos.Motion.Y += lift * Math.Min(hmotion / AltGliderServerConfig.Instance.BrakeHMotionLimit, 1);
                 }
                 else
                 {
