@@ -1,4 +1,4 @@
-﻿using InsanityLib.Attributes.Auto.Config;
+﻿using InsanityLib.Generators.Attributes;
 using System.ComponentModel;
 
 namespace AlternativeGliderImplementationReforged.Config
@@ -6,7 +6,7 @@ namespace AlternativeGliderImplementationReforged.Config
     public class AltGliderServerConfig
     {
         [AutoConfig("AlternativeGliderImplementationReforged/ServerConfig.json", ServerSync = true)]
-        public static AltGliderServerConfig Instance { get; private set; }
+        public static AltGliderServerConfig Instance { get; internal set; }
 
         /// <summary>
         /// If enalbled diving is done through sneaking instead of walking forward

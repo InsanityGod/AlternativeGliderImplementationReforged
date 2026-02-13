@@ -1,4 +1,4 @@
-﻿using InsanityLib.Attributes.Auto.Config;
+﻿using InsanityLib.Generators.Attributes;
 using System.ComponentModel;
 
 namespace AlternativeGliderImplementationReforged.Config
@@ -6,7 +6,7 @@ namespace AlternativeGliderImplementationReforged.Config
     public class AltGliderClientConfig
     {
         [AutoConfig("AlternativeGliderImplementationReforged/ClientConfig.json", ServerSync = false)]
-        public static AltGliderClientConfig Instance { get; private set; }
+        public static AltGliderClientConfig Instance { get; internal set; }
 
         /// <summary>
         /// Whether to display the glide power bar

@@ -1,41 +1,54 @@
 ﻿using AlternativeGliderImplementationReforged.Code.GUI;
 using AlternativeGliderImplementationReforged.Config;
-using InsanityLib.Attributes.Auto;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 
-[assembly: AutoPatcher("alternativegliderimplementationreforged")]
+namespace AlternativeGliderImplementationReforged.Code;
 
-namespace AlternativeGliderImplementationReforged.Code
+public partial class AlternativeGliderImplementationReforgedModSystem : ModSystem
 {
-    public class AlternativeGliderImplementationReforgedModSystem : ModSystem
+    public AltGliderElement GliderBarElement { get; private set; }
+
+    public override void StartPre(ICoreAPI api)
     {
-        public AltGliderElement gliderBarElement { get; private set; }
+        base.StartPre(api);
+        AutoSetup(api);
+    }
 
-        public override void StartClientSide(ICoreClientAPI api)
-        {
-            api.Event.PlayerEntitySpawn += player =>
-            {
-                if (player == api.World.Player)
-                {
-                    //Load GUI when player entity is available
-                    LoadGui(api);
-                }
-            };
-        }
+    public override void StartClientSide(ICoreClientAPI api)
+    {
+        api.Event.PlayerEntitySpawn += WaitForPlayerEntity;
+    }
 
-        public void LoadGui(ICoreClientAPI capi)
+    private void WaitForPlayerEntity(IClientPlayer player)
+    {
+        if (_api is ICoreClientAPI capi && player == capi.World.Player)
         {
-            if (AltGliderClientConfig.Instance.ShowBar)
-            {
-                gliderBarElement = new AltGliderElement(capi);
-            }
+            //Load GUI when player entity is available
+            LoadGui(capi);
+            capi.Event.PlayerEntitySpawn -= WaitForPlayerEntity;
         }
+    }
 
-        public override void Dispose()
+    public void LoadGui(ICoreClientAPI capi)
+    {
+        if (AltGliderClientConfig.Instance.ShowBar)
         {
-            base.Dispose();
-            gliderBarElement?.Dispose();
+            GliderBarElement = new AltGliderElement(capi);
         }
+    }
+
+    public override void AssetsLoaded(ICoreAPI api)
+    {
+        base.AssetsLoaded(api);
+        AutoAssetsLoaded(api);
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+        if(_api is ICoreClientAPI capi) capi.Event.PlayerEntitySpawn -= WaitForPlayerEntity;
+        GliderBarElement?.Dispose();
+        AutoDispose();
     }
 }
