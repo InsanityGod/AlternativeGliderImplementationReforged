@@ -58,7 +58,7 @@ namespace AlternativeGliderImplementationReforged.Code.GUI
             ctxStatic.Dispose();
         }
 
-        protected void RecomposeOverlays() => TyronThreadPool.QueueTask(ComposeValueOverlay);
+        protected void RecomposeOverlays() => TyronThreadPool.QueueTask(ComposeValueOverlay, "AltGliderStatBar_OverlayRecompose");
 
         protected void ComposeValueOverlay()
         {
